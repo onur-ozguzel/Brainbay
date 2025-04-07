@@ -1,0 +1,25 @@
+services:
+  postgres:
+    image: postgres
+    environment:
+      - POSTGRES_PASSWORD=postgrespw
+    ports:
+      - 5432:5432
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD", "pg_isready", "-U", "postgres"]
+      interval: 1s
+      retries: 10
+  data-fetcher-svc:
+    image: onurozguzel/data-fetcher-svc:latest
+    build:
+      context: .
+      dockerfile: src/RickAndMortyDataFetcher/Dockerfile
+    environment:
+      - DOTNET_ENVIRONMENT=docker
+    depends_on:
+      postgres:
+        condition: service_healthy
+volumes:
+  pgdata:
