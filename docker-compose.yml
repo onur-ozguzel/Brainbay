@@ -17,7 +17,7 @@ services:
       context: .
       dockerfile: src/RickAndMortyDataFetcher/Dockerfile
     environment:
-      - DOTNET_ENVIRONMENT=docker
+      - DOTNET_ENVIRONMENT=Docker
     depends_on:
       postgres:
         condition: service_healthy

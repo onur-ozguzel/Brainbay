@@ -15,7 +15,7 @@
             "stopAtEntry": false,
             "console": "internalConsole",
             "env": {
-                "DOTNET_ENVIRONMENT": "development"
+                "DOTNET_ENVIRONMENT": "Development"
             }
         },
         {
