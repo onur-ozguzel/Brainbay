@@ -42,3 +42,5 @@ app.MapGet("/", context =>
 });
 
 app.Run();
+
+public partial class Program { }
