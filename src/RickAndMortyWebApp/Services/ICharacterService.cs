@@ -1,9 +1,11 @@
-﻿using RickAndMortyWebApp.Entities;
+﻿using RickAndMortyWebApp.Models;
 
 namespace RickAndMortyWebApp.Services
 {
     public interface ICharacterService
     {
-        Task<List<Character>> GetCharacters(int pageIndex, int pageSize);
+        Task<PaginationModel<CharacterListModel>> GetCharacters(int pageIndex, int pageSize);
+        Task CreateCharacter(CharacterModel model);
+        Task<CharacterModel?> GetCharacter(int id);
     }
 }

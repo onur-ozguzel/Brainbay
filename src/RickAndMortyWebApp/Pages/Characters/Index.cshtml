@@ -14,31 +14,32 @@
     <thead>
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.Characters[0].Name)
+                @Html.DisplayNameFor(model => model.PaginatedResults.Data[0].Name)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Characters[0].Species)
+                @Html.DisplayNameFor(model => model.PaginatedResults.Data[0].Species)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Characters[0].Type)
+                @Html.DisplayNameFor(model => model.PaginatedResults.Data[0].Type)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Characters[0].Gender)
+                @Html.DisplayNameFor(model => model.PaginatedResults.Data[0].Gender)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Characters[0].OriginName)
+                @Html.DisplayNameFor(model => model.PaginatedResults.Data[0].OriginName)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Characters[0].LocationName)
+                @Html.DisplayNameFor(model => model.PaginatedResults.Data[0].LocationName)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Characters[0].Image)
+                @Html.DisplayNameFor(model => model.PaginatedResults.Data[0].Image)
             </th>
             <th></th>
         </tr>
     </thead>
     <tbody>
-@foreach (var item in Model.Characters) {
+        @foreach (var item in Model.PaginatedResults.Data)
+        {
         <tr>
             <td>
                 @Html.DisplayFor(modelItem => item.Name)
@@ -68,3 +69,49 @@
 }
     </tbody>
 </table>
+
+<ul class="pagination">
+    <!-- Previous Button -->
+    <li class="page-item @(Model.PaginatedResults.PageIndex == 1 ? "disabled" : "")">
+        <a class="page-link" href="?currentPage=@(Model.PaginatedResults.PageIndex - 1)&pageSize=@Model.PaginatedResults.PageSize">Previous</a>
+    </li>
+
+    <!-- First Page -->
+    <li class="page-item @(Model.PaginatedResults.PageIndex == 1 ? "active" : "")">
+        <a class="page-link" href="?currentPage=1&pageSize=@Model.PaginatedResults.PageSize">1</a>
+    </li>
+
+    @if (Model.PaginatedResults.PageIndex > 4)
+    {
+        <li class="page-item disabled"><a class="page-link">...</a></li>
+    }
+
+    <!-- Pages Near Current Page -->
+    @for (int i = Model.PaginatedResults.PageIndex - 3; i <= Model.PaginatedResults.PageIndex + 3; i++)
+    {
+        if (i > 1 && i < Model.PaginatedResults.TotalPages)
+        {
+            <li class="page-item @(i == Model.PaginatedResults.PageIndex ? "active" : "")">
+                <a class="page-link" href="?currentPage=@i&pageSize=@Model.PaginatedResults.PageSize">@i</a>
+            </li>
+        }
+    }
+
+    @if (Model.PaginatedResults.PageIndex < Model.PaginatedResults.TotalPages - 3)
+    {
+        <li class="page-item disabled"><a class="page-link">...</a></li>
+    }
+
+    <!-- Last Page -->
+    @if (Model.PaginatedResults.TotalPages > 1)
+    {
+        <li class="page-item @(Model.PaginatedResults.PageIndex == Model.PaginatedResults.TotalPages ? "active" : "")">
+            <a class="page-link" href="?currentPage=@Model.PaginatedResults.TotalPages&pageSize=@Model.PaginatedResults.PageSize">@Model.PaginatedResults.TotalPages</a>
+        </li>
+    }
+
+    <!-- Next Button -->
+    <li class="page-item @(Model.PaginatedResults.PageIndex >= Model.PaginatedResults.TotalPages ? "disabled" : "")">
+        <a class="page-link" href="?currentPage=@(Model.PaginatedResults.PageIndex + 1)&pageSize=@Model.PaginatedResults.PageSize">Next</a>
+    </li>
+</ul>
