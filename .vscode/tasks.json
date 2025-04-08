@@ -12,6 +12,18 @@
             "problemMatcher": "$msCompile",
             "group": "build",
             "detail": "Build RickAndMortyDataFetcher project"
+        },
+        {
+            "label": "build",
+            "command": "dotnet",
+            "type": "process",
+            "args": [
+                "build",
+                "${workspaceFolder}/src/RickAndMortyWebApp/RickAndMortyWebApp.csproj"
+            ],
+            "problemMatcher": "$msCompile",
+            "group": "build",
+            "detail": "Build RickAndMortyDataFetcher project"
         }
 	]
 }

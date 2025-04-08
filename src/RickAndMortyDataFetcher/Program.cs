@@ -32,7 +32,6 @@ using var host = Host.CreateDefaultBuilder(args)
             client.BaseAddress = new Uri(context.Configuration["ApiBaseAddress"]!);
             client.DefaultRequestHeaders.Add(HeaderNames.Accept, "application/json");
         });
-        services.AddScoped<IHttpHelper, HttpHelper>();
         services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
     })
     .Build();
@@ -70,9 +69,9 @@ static async Task InitializeDatabaseAsync(IHost host, CancellationToken cancella
 {
     using var scope = host.Services.CreateScope();
     var dbContext = scope.ServiceProvider.GetRequiredService<RickAndMortyDbContext>();
-    var fetchService = scope.ServiceProvider.GetRequiredService<ICharacterService>();
+    var characterService = scope.ServiceProvider.GetRequiredService<ICharacterService>();
 
     dbContext.Database.EnsureDeleted();
     dbContext.Database.EnsureCreated();
-    await fetchService.GetAndSaveAliveCharactersAsync(cancellationToken);
+    await characterService.GetAndSaveAliveCharactersAsync(cancellationToken);
 }

@@ -5,7 +5,7 @@
     "version": "0.2.0",
     "configurations": [
         {
-            "name": ".NET Core Launch (console)",
+            "name": "DataFetcher Launch (console)",
             "type": "coreclr",
             "request": "launch",
             "preLaunchTask": "build",
@@ -19,11 +19,24 @@
             }
         },
         {
-            "name": "C#: RickAndMortyDataFetcher",
-            "type": "dotnet",
+            "name": ".NET Core Launch (web)",
+            "type": "coreclr",
             "request": "launch",
-            "projectPath": "${workspaceFolder}\\src\\RickAndMortyDataFetcher\\RickAndMortyDataFetcher.csproj",
-            "launchConfigurationId": "TargetFramework=;RickAndMortyDataFetcher"
+            "preLaunchTask": "build",
+            "program": "${workspaceFolder}/src/RickAndMortyWebApp/bin/Debug/net8.0/RickAndMortyWebApp.dll",
+            "args": [],
+            "cwd": "${workspaceFolder}",
+            "stopAtEntry": false,
+            "serverReadyAction": {
+                "action": "openExternally",
+                "pattern": "\\bNow listening on:\\s+(https?://\\S+)"
+            },
+            "env": {
+                "ASPNETCORE_ENVIRONMENT": "Development"
+            },
+            "sourceFileMap": {
+                "/Views": "${workspaceFolder}/Views"
+            }
         }
     ]
 }

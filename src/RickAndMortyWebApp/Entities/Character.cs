@@ -1,4 +1,7 @@
-namespace RickAndMortyDataFetcher.Entities;
+using System.ComponentModel.DataAnnotations.Schema;
+using System.ComponentModel.DataAnnotations;
+
+namespace RickAndMortyWebApp.Entities;
 
 public class Character
 {
