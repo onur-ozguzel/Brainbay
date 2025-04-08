@@ -21,5 +21,19 @@ services:
     depends_on:
       postgres:
         condition: service_healthy
+  web-app-svc:
+    image: onurozguzel/web-app-svc:latest
+    build:
+      context: .
+      dockerfile: src/RickAndMortyWebApp/Dockerfile
+    environment:
+      - DOTNET_ENVIRONMENT=Docker
+    ports:
+      - 8080:8080
+    depends_on:
+      postgres:
+        condition: service_healthy
+      data-fetcher-svc:
+        condition: service_completed_successfully
 volumes:
   pgdata:

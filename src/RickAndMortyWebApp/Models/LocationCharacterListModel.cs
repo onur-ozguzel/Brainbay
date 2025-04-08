@@ -2,7 +2,7 @@
 
 namespace RickAndMortyWebApp.Models
 {
-    public class CharacterListModel
+    public class LocationCharacterListModel
     {
         public int Id { get; set; }
         
@@ -16,9 +16,6 @@ namespace RickAndMortyWebApp.Models
         
         [Display(Name = "Origin Name")]
         public string OriginName { get; set; } = string.Empty;
-        
-        [Display(Name = "Location Name")]      
-        public string LocationName { get; set; } = string.Empty;
         
         public string Image { get; set; } = string.Empty;
     }

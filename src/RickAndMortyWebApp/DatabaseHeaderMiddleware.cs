@@ -9,15 +9,9 @@
             // Check if it's going to be served from the cache by using OnStarting
             response.OnStarting(() =>
             {
-                if (response.Headers.ContainsKey("Age"))
+                if (!response.Headers.ContainsKey("Age"))
                 {
-                    // Age header exists, meaning it's served from the cache
-                    response.Headers["from-database"] = "false";
-                }
-                else
-                {
-                    // Otherwise, the request was processed normally
-                    response.Headers["from-database"] = "true";
+                    response.Headers["from-database"] = string.Empty;
                 }
 
                 return Task.CompletedTask;

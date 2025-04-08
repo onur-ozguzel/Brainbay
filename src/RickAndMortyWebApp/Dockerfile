@@ -9,11 +9,11 @@ COPY src src
 RUN dotnet restore src/Brainbay.sln
 
 
-WORKDIR /app/src/RickAndMortyDataFetcher
+WORKDIR /app/src/RickAndMortyWebApp
 RUN dotnet publish -c Release -o /app/src/out
 
 # build runtime image
 FROM mcr.microsoft.com/dotnet/aspnet:8.0
 WORKDIR /app
 COPY --from=build /app/src/out .
-ENTRYPOINT [ "dotnet","RickAndMortyDataFetcher.dll" ]
+ENTRYPOINT [ "dotnet","RickAndMortyWebApp.dll" ]

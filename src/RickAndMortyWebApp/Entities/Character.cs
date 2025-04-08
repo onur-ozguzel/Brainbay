@@ -1,5 +1,8 @@
 namespace RickAndMortyWebApp.Entities;
 
+/// <summary>
+/// NOTE: for simplicity I didn't create a common layer between DataFetcher & WebApp
+/// </summary>
 public class Character
 {
     public int Id { get; set; }

@@ -8,7 +8,7 @@ namespace RickAndMortyWebApp.Services
     public class CharacterService(RickAndMortyWebAppContext context) : ICharacterService
     {
         /// <summary>
-        // for the sake of simplicity
+        // NOTE: for simplicity
         /// - I did pager calculation in this service
         ///   Other patterns like Specification can be used for this purpose
         /// - I didn't create repository
@@ -19,9 +19,11 @@ namespace RickAndMortyWebApp.Services
         /// <returns></returns>
         public async Task<PaginationModel<CharacterListModel>> GetCharacters(int pageIndex, int pageSize)
         {
-            var totalCount = await context.Characters.CountAsync();
+            var query = context.Characters.AsQueryable();
+
+            var totalCount = await query.CountAsync();
             int skip = pageSize * (pageIndex - 1);
-            var dbResults = await context.Characters.Include(i => i.CharacterEpisodes).Skip(skip).Take(pageSize).ToListAsync();
+            var dbResults = await query.Skip(skip).Take(pageSize).ToListAsync();
 
 
             return new PaginationModel<CharacterListModel>(pageIndex, pageSize, totalCount, [.. dbResults.Select(s => new CharacterListModel
@@ -38,7 +40,39 @@ namespace RickAndMortyWebApp.Services
         }
 
         /// <summary>
-        /// for the sake of simplicity
+        /// NOTE: for simplicity
+        /// - I did pager calculation in this service
+        ///   Other patterns like Specification can be used for this purpose
+        /// - I didn't create repository
+        /// - I mapped fields manually
+        /// </summary>
+        /// <param name="pageIndex"></param>
+        /// <param name="pageSize"></param>
+        /// <param name="locationName"></param>
+        /// <returns></returns>
+        public async Task<PaginationModel<LocationCharacterListModel>> GetCharactersByLocation(int pageIndex, int pageSize, string locationName)
+        {
+            var query = context.Characters.Where(w => w.LocationName == locationName).AsQueryable();
+
+            var totalCount = await query.CountAsync();
+            int skip = pageSize * (pageIndex - 1);
+            var dbResults = await query.Skip(skip).Take(pageSize).ToListAsync();
+
+
+            return new PaginationModel<LocationCharacterListModel>(pageIndex, pageSize, totalCount, [.. dbResults.Select(s => new LocationCharacterListModel
+            {
+                Gender = s.Gender,
+                Id = s.Id,
+                Image = s.Image,
+                Name = s.Name,
+                OriginName = s.OriginName,
+                Species = s.Species,
+                Type = s.Type
+            })]);
+        }
+
+        /// <summary>
+        /// NOTE: for simplicity
         ///  - I mapped fields manually
         ///  - I didn't create repository
         /// </summary>
@@ -68,7 +102,7 @@ namespace RickAndMortyWebApp.Services
         }
 
         /// <summary>
-        /// for the sake of simplicity
+        /// NOTE: for simplicity
         ///  - I mapped fields manually
         ///  - I didn't create repository
         /// </summary>

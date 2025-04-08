@@ -24,6 +24,8 @@ namespace RickAndMortyWebApp.Pages.Characters
             }
 
             await characterService.CreateCharacter(Character);
+
+            // delete cache by tag
             await cacheStore.EvictByTagAsync("AliveCharacters", default);
 
             return RedirectToPage("./Index");

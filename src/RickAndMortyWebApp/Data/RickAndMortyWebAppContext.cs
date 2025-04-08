@@ -3,6 +3,9 @@ using RickAndMortyWebApp.Entities;
 
 namespace RickAndMortyWebApp.Data
 {
+    /// <summary>
+    /// NOTE: for simplicity I didn't create a common layer between DataFetcher & WebApp for the database objects
+    /// </summary>
     public class RickAndMortyWebAppContext : DbContext
     {
         public RickAndMortyWebAppContext (DbContextOptions<RickAndMortyWebAppContext> options)

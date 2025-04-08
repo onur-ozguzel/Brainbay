@@ -4,7 +4,6 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Net.Http.Headers;
 using RickAndMortyDataFetcher.Data;
-using RickAndMortyDataFetcher.Helpers;
 using RickAndMortyDataFetcher.Services;
 
 using var host = Host.CreateDefaultBuilder(args)

@@ -11,6 +11,9 @@ builder.Services.AddDbContext<RickAndMortyWebAppContext>(options =>
         ?? throw new InvalidOperationException("Connection string 'DefaultConnection' not found.")));
 
 builder.Services.AddScoped<ICharacterService, CharacterService>();
+// NOTE: there are various ways to use cache, like redis cache if we would like to support scaling-up,
+// or inmemory cache if we would like to cache the response etc.
+// I choosed output cache for simplicity
 builder.Services.AddOutputCache();
 
 var app = builder.Build();

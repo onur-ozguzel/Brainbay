@@ -51,7 +51,7 @@ public class CharacterService(HttpClient httpClient, IMapper mapper, RickAndMort
         return result;
     }
 
-    // for the sake of simplicity
+    // NOTE: for simplicity
     // - I didn't introduced any repository
     private async Task SaveCharactersAsync(List<Character> characters, CancellationToken cancellationToken)
     {
@@ -59,9 +59,9 @@ public class CharacterService(HttpClient httpClient, IMapper mapper, RickAndMort
         await dbContext.SaveChangesAsync(cancellationToken);
     }
 
-    // for the sake of simplicity
+    // NOTE: for simplicity
     // - I implemented this method to this service
-    // - It can be extracted to another class like an HttpHelper class
+    // - It can be extracted to another class like an HttpHelper etc.
     public async Task<HttpResponseMessage> SendGetRequestAsync(string endpoint, HttpClient httpClient, CancellationToken cancellationToken = default)
     {
         var response = await httpClient.GetAsync(endpoint, cancellationToken);
