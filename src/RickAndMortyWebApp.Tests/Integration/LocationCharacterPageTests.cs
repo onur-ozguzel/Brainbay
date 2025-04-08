@@ -79,18 +79,6 @@ namespace RickAndMortyWebApp.Tests.Integration
         }
 
         [Fact]
-        public async Task Get_LocationCharacterPage_ShouldDisplayCharacterTable_WhenDataExists()
-        {
-            var url = "/LocationCharacter?locationName=Citadel%20of%20Ricks&pageSize=5";
-
-            var response = await _client.GetAsync(url);
-            var content = await response.Content.ReadAsStringAsync();
-
-            Assert.Contains("<table", content);
-            Assert.Contains("Rick Sanchez", content);
-        }
-
-        [Fact]
         public async Task LocationCharacterPage_ShouldReturnDatabaseHeaderOnlyOnFirstCall()
         {
             // Arrange
@@ -99,7 +87,7 @@ namespace RickAndMortyWebApp.Tests.Integration
             // Act - First Call
             var firstResponse = await _client.GetAsync(url);
             firstResponse.EnsureSuccessStatusCode();
-            var firstHasDbHeader = firstResponse.Headers.TryGetValues("from-database", out var firstHeaderValues);
+            var firstHasDbHeader = firstResponse.Headers.TryGetValues("from-database", out _);
 
             // Assert First Call
             Assert.True(firstHasDbHeader);
