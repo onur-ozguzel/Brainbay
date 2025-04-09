@@ -25,7 +25,9 @@ namespace RickAndMortyWebApp.Pages.Characters
 
             await characterService.CreateCharacter(Character);
 
-            // delete cache by tag
+            // NOTE: Invalidating the cache might not be the responsibility of this page
+            // but I left it like this for the simplicity. A better approach might be 
+            // implementing events
             await cacheStore.EvictByTagAsync("AliveCharacters", default);
 
             return RedirectToPage("./Index");
